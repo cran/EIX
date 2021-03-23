@@ -24,8 +24,9 @@
 #' @param data a data table with data used to train the model.
 #' @param option if "variables" then table includes only single variables,
 #'            if "interactions", then only interactions
-#'            if "both", then both single variable and interactons.
+#'            if "both", then both single variable and interactions.
 #'            Default "both".
+#' @param digits number of significant digits that shall be returned. Will be passed to the signif() functions.
 #'
 #' @return a data table
 #'
@@ -58,25 +59,10 @@
 #'  imp
 #' plot(imp, top = NULL, radar = FALSE, xmeasure = "sumCover", ymeasure = "sumGain")
 #'
-#'\donttest{
-#'library(lightgbm)
-#'train_data <- lgb.Dataset(sm, label =  HR_data[, left] == 1)
-#'params <- list(objective = "binary", max_depth = 2)
-#'lgb_model <- lgb.train(params, train_data, 25)
-#'
-#' imp <- importance(lgb_model, sm, option = "both")
-#' imp
-#' plot(imp,  top = nrow(imp))
-#'
-#' imp <- importance(lgb_model, sm, option = "variables")
-#' imp
-#' plot(imp, top = NULL, radar = FALSE, xmeasure = "sumCover", ymeasure = "sumGain")
-#'
-#'}
 #'
 #' @export
 
-importance <- function(xgb_model, data, option = "both"){
+importance <- function(xgb_model, data, option = "both", digits = 4){
   importance <- NULL
 
   if (option == "both") {
@@ -89,7 +75,7 @@ importance <- function(xgb_model, data, option = "both"){
     importance <- importanceInteraction(xgb_model, data)
   }
 
-  importance <- cbind(importance[, 1], signif(importance[, -1], digits = 4))
+  importance <- cbind(importance[, 1], signif(importance[, -1], digits = digits))
   #importance <- unlist(importance)
 
   class(importance) <- c("importance", "data.table")

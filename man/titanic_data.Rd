@@ -4,13 +4,14 @@
 \name{titanic_data}
 \alias{titanic_data}
 \title{Passengers and Crew on the RMS Titanic}
-\format{a data frame with 2207 rows and 11 columns}
+\format{
+a data frame with 2207 rows and 11 columns
+}
 \source{
 The description of dataset was copied from the \code{DALEX} package.
 This dataset was copied from the \code{stablelearner} package and went through few variable
 transformations. The complete list of persons on the RMS titanic was downloaded from
-\url{https://www.encyclopedia-titanica.org} on April 5, 2016. The  information given
-in \code{sibsp} and \code{parch} was adopoted from a data set obtained from \url{http://biostat.mc.vanderbilt.edu/DataSets}.
+\url{https://www.encyclopedia-titanica.org} on April 5, 2016.
 }
 \usage{
 data(titanic_data)
@@ -47,7 +48,7 @@ is truely missing for a few regular passengers.
 }
 }
 \references{
-\url{https://www.encyclopedia-titanica.org}, \url{http://biostat.mc.vanderbilt.edu/DataSets},
+\url{https://www.encyclopedia-titanica.org},
 \url{https://CRAN.R-project.org/package=stablelearner}, \url{https://cran.r-project.org/package=DALEX}.
 }
 \keyword{titanic_data}

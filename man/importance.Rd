@@ -4,7 +4,7 @@
 \alias{importance}
 \title{Importance of variables and interactions in the model}
 \usage{
-importance(xgb_model, data, option = "both")
+importance(xgb_model, data, option = "both", digits = 4)
 }
 \arguments{
 \item{xgb_model}{a xgboost or lightgbm model.}
@@ -13,8 +13,10 @@ importance(xgb_model, data, option = "both")
 
 \item{option}{if "variables" then table includes only single variables,
 if "interactions", then only interactions
-if "both", then both single variable and interactons.
+if "both", then both single variable and interactions.
 Default "both".}
+
+\item{digits}{number of significant digits that shall be returned. Will be passed to the signif() functions.}
 }
 \value{
 a data table
@@ -66,20 +68,5 @@ plot(imp,  top =  nrow(imp))
  imp
 plot(imp, top = NULL, radar = FALSE, xmeasure = "sumCover", ymeasure = "sumGain")
 
-\donttest{
-library(lightgbm)
-train_data <- lgb.Dataset(sm, label =  HR_data[, left] == 1)
-params <- list(objective = "binary", max_depth = 2)
-lgb_model <- lgb.train(params, train_data, 25)
-
-imp <- importance(lgb_model, sm, option = "both")
-imp
-plot(imp,  top = nrow(imp))
-
-imp <- importance(lgb_model, sm, option = "variables")
-imp
-plot(imp, top = NULL, radar = FALSE, xmeasure = "sumCover", ymeasure = "sumGain")
-
-}
 
 }
